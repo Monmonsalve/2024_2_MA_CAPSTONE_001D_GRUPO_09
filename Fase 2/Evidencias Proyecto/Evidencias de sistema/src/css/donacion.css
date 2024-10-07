@@ -1,0 +1,64 @@
+.Donacion{
+    border: 3px solid gray;
+    border-radius: 16px solid gray;
+}
+
+.Donacion {
+    display: flex;
+    flex-direction: column;
+    padding: 50px; /* Un poco de padding para dar espacio interno */
+}
+
+.title {
+    text-align: center;
+}
+
+span{
+    font-size: x-large;
+}
+.button-donacion{
+    border-radius: 15px;
+    margin: auto;
+    width: auto;
+
+}
+
+.info-footer{
+    font-size: medium;
+}
+
+
+.info-finish {
+    border-top: 3px solid gray; 
+    background-color: rgb(27, 26, 26);
+    color: white; 
+    position: static;
+    bottom: 0 auto;
+    width: 100%;    width: auto;
+}
+
+
+.link-web{
+    padding-right: 20px;
+    color: gray;
+}
+
+.info {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.input {
+    width: 100%; 
+    max-width: 300px; 
+    padding: 8px; 
+    margin-bottom: 20px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .Donacion {
+        margin-left: 20px; 
+        margin-right: 20px; 
+    }
+}
