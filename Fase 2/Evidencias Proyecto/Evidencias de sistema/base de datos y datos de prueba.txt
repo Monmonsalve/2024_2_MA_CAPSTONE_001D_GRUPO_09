@@ -1,0 +1,148 @@
+CREATE TABLE users (
+    id_user INT PRIMARY KEY AUTO_INCREMENT,
+    rut VARCHAR(12) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    direccion VARCHAR(255),
+    telefono VARCHAR(15)
+);
+
+CREATE TABLE donaciones (
+    id_donacion INT PRIMARY KEY AUTO_INCREMENT,
+    tipo_donacion VARCHAR(50) NOT NULL,
+    fecha_donacion DATE NOT NULL,
+    message TEXT,
+    id_user INT,
+    id_detalleDonacion INT,
+    FOREIGN KEY (id_user) REFERENCES users(id_user),
+    FOREIGN KEY (id_detalleDonacion) REFERENCES DetalleDonacion(id_donacion)
+);
+
+CREATE TABLE DetalleDonacion (
+    id_donacion INT PRIMARY KEY,
+    monto DECIMAL(10, 2) NOT NULL,
+    detalle TEXT,
+    tipoTarjeta VARCHAR(50),
+    FOREIGN KEY (id_donacion) REFERENCES donaciones(id_donacion)
+);
+
+CREATE TABLE fecha_visitas (
+    id_visita INT PRIMARY KEY AUTO_INCREMENT,
+    fecha_visita DATE NOT NULL,
+    hora_visita TIME NOT NULL,
+    id_user INT,
+    id_pets INT,
+    FOREIGN KEY (id_user) REFERENCES users(id_user),
+    FOREIGN KEY (id_pets) REFERENCES pets(id_pets)
+);
+
+CREATE TABLE pets (
+    id_pets INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    especie VARCHAR(50) NOT NULL,
+    raza VARCHAR(50),
+    edad INT,
+    sexo VARCHAR(10),
+    descripcion TEXT,
+    fecha_llegada DATE NOT NULL,
+    disponibilidad BOOLEAN DEFAULT TRUE,
+    id_refugio INT,
+    FOREIGN KEY (id_refugio) REFERENCES refugio(id_refugio)
+);
+
+CREATE TABLE imagenes (
+    id_img INT PRIMARY KEY AUTO_INCREMENT,
+    comentario TEXT,
+    img VARCHAR(255) NOT NULL,
+    id_pets INT,
+    FOREIGN KEY (id_pets) REFERENCES pets(id_pets)
+);
+
+CREATE TABLE refugio (
+    id_refugio INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    direccion VARCHAR(255),
+    telefono VARCHAR(15)
+);
+
+CREATE TABLE admin (
+    id_admin INT PRIMARY KEY AUTO_INCREMENT,
+    rut VARCHAR(12) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    telefono VARCHAR(15),
+    id_refugio INT,
+    FOREIGN KEY (id_refugio) REFERENCES refugio(id_refugio)
+);
+
+CREATE TABLE adoptante (
+    id_adoptante INT PRIMARY KEY AUTO_INCREMENT,
+    fecha_adopcion DATE NOT NULL,
+    id_user INT,
+    id_pets INT,
+    FOREIGN KEY (id_user) REFERENCES users(id_user),
+    FOREIGN KEY (id_pets) REFERENCES pets(id_pets)
+);
+
+CREATE TABLE documentos (
+    id_documento INT PRIMARY KEY AUTO_INCREMENT,
+    documento VARCHAR(255) NOT NULL,
+    estado VARCHAR(50),
+    id_adoptante INT,
+    FOREIGN KEY (id_adoptante) REFERENCES adoptante(id_adoptante)
+);
+
+CREATE TABLE reuniones (
+    id_reunion INT PRIMARY KEY AUTO_INCREMENT,
+    fecha_reunion DATE NOT NULL,
+    message TEXT,
+    link_reunion VARCHAR(255),
+    email_cliente VARCHAR(100),
+    id_adoptante INT,
+    FOREIGN KEY (id_adoptante) REFERENCES adoptante(id_adoptante)
+);
+
+-- Insertar datos en la tabla users
+INSERT INTO users (rut, nombre, apellido, email, password, direccion, telefono) VALUES
+('12345678-9', 'Juan', 'Pérez', 'juan.perez@example.com', 'password123', 'Calle Falsa 123', '123456789'),
+('98765432-1', 'Ana', 'Gómez', 'ana.gomez@example.com', 'password456', 'Avenida Siempre Viva 742', '987654321');
+
+-- Insertar datos en la tabla refugio
+INSERT INTO refugio (nombre, direccion, telefono) VALUES
+('Refugio Animal', 'Calle de los Animales 456', '555123456'),
+('Hogar de Mascotas', 'Avenida de los Refugios 789', '555987654');
+
+-- Insertar datos en la tabla pets
+INSERT INTO pets (nombre, especie, raza, edad, sexo, descripcion, fecha_llegada, disponibilidad, id_refugio) VALUES
+('Max', 'Perro', 'Labrador', 3, 'Macho', 'Perro muy amistoso', '2023-01-01', TRUE, 1),
+('Luna', 'Gato', 'Siames', 2, 'Hembra', 'Gata juguetona', '2023-02-15', TRUE, 1),
+('Rocky', 'Perro', 'Bulldog', 4, 'Macho', 'Perro protector', '2023-03-10', TRUE, 2);
+
+-- Insertar datos en la tabla donaciones
+INSERT INTO donaciones (tipo_donacion, fecha_donacion, message, id_user, id_detalleDonacion) VALUES
+('Monetaria', '2023-04-01', 'Donación para la compra de alimentos', 1, 1),
+('Material', '2023-05-10', 'Donación de juguetes y mantas', 2, 2);
+
+-- Insertar datos en la tabla DetalleDonacion
+INSERT INTO DetalleDonacion (id_donacion, monto, detalle, tipoTarjeta) VALUES
+(1, 100000.00, 'Donación mensual', 'Crédito'),
+(2, 50000.00, 'Juguetes y mantas', 'Débito');
+
+-- Insertar datos en la tabla imagenes
+INSERT INTO imagenes (comentario, img, id_pets) VALUES
+('Max disfrutando del parque', 'max_parque.jpg', 1),
+('Luna durmiendo', 'luna_durmiendo.jpg', 2);
+
+-- Insertar datos en la tabla fecha_visitas
+INSERT INTO fecha_visitas (fecha_visita, hora_visita, id_user, id_pets) VALUES
+('2023-06-01', '10:00:00', 1, 1),
+('2023-06-05', '14:00:00', 2, 2);
+
+-- Insertar datos en la tabla admin
+INSERT INTO admin (rut, nombre, apellido, email, password, telefono, id_refugio) VALUES
+('11111111-1', 'Carlos', 'Lopez', 'carlos.lopez@example.com', 'adminpass', '555112233', 1),
+('22222222-2', 'Maria', 'Martinez', 'maria.martinez@example.com', 'adminpass', '555223344', 2);
