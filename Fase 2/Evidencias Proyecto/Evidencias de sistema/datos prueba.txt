@@ -1,0 +1,43 @@
+INSERT INTO especie (especie) VALUES
+('Perro'),
+('Gato'),
+('Conejo'),
+('Hámster'),
+('Tortuga');
+
+
+INSERT INTO api_raza (id_especie_id, raza) VALUES
+-- Razas de Perro
+(1, 'Labrador Retriever'),
+(1, 'Golden Retriever'),
+(1, 'Bulldog'),
+(1, 'Yorkie'),
+(1, 'Poodle'),
+
+-- Razas de Gato
+(2, 'Siamés'),
+(2, 'Persa'),
+(2, 'Maine Coon'),
+(2, 'Bengalí'),
+(2, 'Sphynx'),
+
+-- Razas de Conejo
+(3, 'Holland Lop'),
+(3, 'Netherland Dwarf'),
+(3, 'Angora'),
+(3, 'Mini Rex'),
+(3, 'Lionhead'),
+
+-- Razas de Hámster
+(4, 'Hámster Dorado'),
+(4, 'Hámster Ruso'),
+(4, 'Hámster Enano de Campbell'),
+(4, 'Hámster Roborovski'),
+(4, 'Hámster de Ceylán'),
+
+-- Razas de Tortuga
+(5, 'Tortuga de Tierra'),
+(5, 'Tortuga de Agua Dulce'),
+(5, 'Tortuga Marina'),
+(5, 'Tortuga de caja'),
+(5, 'Tortuga de orejas rojas');
